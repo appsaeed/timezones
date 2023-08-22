@@ -12,7 +12,7 @@ export default function TimezoneCard({ timezone = "Asia/Dhaka", name = "" }) {
             className=" object-cover w-full h-full rounded-full"
           />
         </div>
-        <div className="link text-slate-300 w-20">{name}</div>
+     
         <div className="flex text-slate-300">{timezone}</div>
       </div>
       <div className="">
