@@ -1,6 +1,6 @@
 import { avatar } from "appmon/generate";
 import ClockCard from "./ClockCard";
-export default function TimezoneCard({ timezone = "Asia/Dhaka", name = "" }) {
+export default function TimezoneCard({ timezone = "Asia/Dhaka" }) {
   return (
     <div className="bg-slate-700 p-6 rounded-2xl flex-1">
       <div className="flex justify-between gap-6 mb-6 w-full">
