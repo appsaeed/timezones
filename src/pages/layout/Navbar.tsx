@@ -3,10 +3,11 @@ import { useState } from "react";
 import { Moon, Sun } from "react-feather";
 
 export default function Navbar() {
+  const homeurl = `${location.protocol}://${location.hostname}/${location.pathname}`;
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a className="flex items-center">
+        <a href={homeurl} className="flex items-center">
           <img src={"./favicon-96x96.png"} className="h-8 mr-3" alt="Flowbite Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             Timezone
@@ -40,7 +41,7 @@ export default function Navbar() {
         </button>
         <div className="hidden w-full md:block md:w-auto" id="navbar-multi-level">
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <Menulist name="Home" link="/" />
+            <Menulist name="Home" link={homeurl} />
             <Menulist name="Contact" link="mailto:appsaeed7@gmail.com" />
             <Menulist name="About" link="https://appsaeed.github.io" />
             <Menulist name="Github" link="https://github.com/appsaeed/timezone" />
