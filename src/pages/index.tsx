@@ -53,7 +53,7 @@ export function TimezoneCardGroup() {
       </div>
       <div className="grid sm:grid-cols-3 justify-center gap-4 mt-6">
         {zones.map((item, index) => (
-          <TimezoneCard key={index} timezone={item.value} name={item.name} />
+          <TimezoneCard key={index} timezone={item.value}  />
         ))}
       </div>
     </div>
