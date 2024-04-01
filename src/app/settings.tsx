@@ -30,7 +30,7 @@ const settings = {
 
     scope: makeScope(),
 
-    theme_key: import.meta.env.VITE_THEME_STORAGE,
+    theme_key: import.meta.env.VITE_THEME_STORAGE || 'theme',
 
     theme: getThemeStore(import.meta.env.VITE_THEME_STORAGE) || deviceTheme(),
 };

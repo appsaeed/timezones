@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { MdRefresh } from "react-icons/md";
+import { cn } from "../app/utiles";
 import { default as timezone, default as timezoneList } from "../assets/timezones.json";
 import ButtonGGreen from "../components/ButtonGGreen";
 import TimezoneCard from "../components/TimezoneCard";
@@ -49,13 +51,22 @@ export function TimezoneCardGroup() {
     // setItmezone([sort[0]]);
   };
 
+
   return (
     <div className="p-6">
-      <div className="flex gap-4 sm:justify-end">
-        <ButtonGGreen onClick={sortTimezone}>Refresh</ButtonGGreen>
-        <SearchBar value={search} onChange={(e) => setSearch(e.target.value)} />
+      <div className="flex gap-4 justify-between my-4">
+        <ButtonGGreen onClick={sortTimezone} className="group">
+          <MdRefresh className={cn(
+            "mr-1 text-lg transition-all  duration-[1s] group-active:rotate-[360deg]"
+          )} />
+          Refresh
+        </ButtonGGreen>
+        <SearchBar
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </div>
-      <div className="grid sm:grid-cols-3 justify-center gap-4 mt-6">
+      <div className="flex flex-col md:grid md:grid-cols-3 justify-center gap-4 mb-8">
         {timezones.map((item: Timezone, index) => (
           <TimezoneCard key={index} {...item} />
         ))}

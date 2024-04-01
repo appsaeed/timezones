@@ -1,9 +1,10 @@
 import { setThemeStore } from "appmon/storage";
 import { useEffect, useState } from "react";
 
+import { useApp } from "../../app/AppProvidor";
 import settings from "../../app/settings";
 import { cn } from "../../app/utiles";
-import languages from "../../assets/languages.json";
+import countries from "../../assets/countries.json";
 import Dropdown from "../../components/Dropdown";
 import DropdownItem from "../../components/DropdownItem";
 import Moon from "../../components/Moon";
@@ -12,7 +13,7 @@ import BrandLogo from "./BrandLogo";
 
 export default function Header() {
     const [fixed, setFixed] = useState(false);
-    const [language, setLanguage] = useState(languages[20])
+    const { locale, setLocale } = useApp();
 
 
     useEffect(() => {
@@ -35,6 +36,15 @@ export default function Header() {
         };
     }, []);
 
+    const updateLang = (locale: string) => {
+        if (locale) {
+            localStorage.setItem('tz_locale', locale);
+            setLocale(locale)
+        }
+    }
+
+    const lang = countries.find(i => i.default_locale === locale);
+
     return (
         <header
             id="header"
@@ -48,14 +58,14 @@ export default function Header() {
             <nav className={"w-full px-8"}>
                 <div className="w-full flex flex-wrap items-center justify-between mx-auto">
                     <BrandLogo logo={settings.logo} href={settings.url} />
-
-                    <SwtichTheme />
-
-                    <div className="flex items-center md:order-2">
+                    <div className="flex items-center">
                         <div className="relative cursor-pointer mr-3 text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
-                            <Dropdown head={language.emoji + ' ' + language.name}>
-                                {languages.map((lang, i) => (
-                                    <DropdownItem key={i} onClick={() => setLanguage(lang)} className="w-48s">
+                            <Dropdown head={
+                                <>{lang?.emoji + ' ' + lang?.name}</>
+                            }>
+                                {countries.map((lang, i) => (
+                                    <DropdownItem key={i}
+                                        onClick={() => updateLang(lang.default_locale)} className="w-48s">
                                         <div className="flex gap-2">
                                             <div className="w-6">{lang.emoji}</div>
                                             <div className="w-36">{lang.name}</div>
@@ -65,6 +75,8 @@ export default function Header() {
                             </Dropdown>
                         </div>
                     </div>
+
+                    <SwtichTheme />
                 </div>
             </nav>
         </header>
