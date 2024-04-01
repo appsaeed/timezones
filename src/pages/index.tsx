@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import timezone from "../assets/timezone";
+
+import { default as timezone, default as timezoneList } from "../assets/timezones.json";
 import ButtonGGreen from "../components/ButtonGGreen";
+import TimezoneCard from "../components/TimezoneCard";
+import { Timezone } from "../types";
 import Navbar from "./layout/Navbar";
 import SearchBar from "./layout/SearchBar";
-import TimezoneCard from "./layout/TimezoneCard";
 
 export default function Index() {
+
+
   return (
     <>
       <Navbar />
@@ -15,17 +19,17 @@ export default function Index() {
 }
 
 export function TimezoneCardGroup() {
-  const [zones, setItmezone] = useState(timezone);
+  const [timezones, setItmezone] = useState(timezoneList);
   const [search, setSearch] = useState("");
 
   const updateTimezone = (value: string) => {
     const key = value.toLowerCase();
     const found = timezone.filter((item) => {
       return (
-        item.name.toLowerCase().replace(/\//, " ").includes(key) ||
-        item.value.toLowerCase().replace(/\//, " ").includes(key) ||
-        item.value.toLowerCase().includes(key) ||
-        item.name.toLowerCase().includes(key)
+        item.timezone.toLowerCase().replace(/\//, " ").includes(key) ||
+        item.timezone.toLowerCase().includes(key) ||
+        item.country_name.toLowerCase().includes(key) ||
+        item.more.standard_name?.toLowerCase().includes(key)
       );
     });
     setItmezone(found);
@@ -52,8 +56,8 @@ export function TimezoneCardGroup() {
         <SearchBar value={search} onChange={(e) => setSearch(e.target.value)} />
       </div>
       <div className="grid sm:grid-cols-3 justify-center gap-4 mt-6">
-        {zones.map((item, index) => (
-          <TimezoneCard key={index} timezone={item.value}  />
+        {timezones.map((item: Timezone, index) => (
+          <TimezoneCard key={index} {...item} />
         ))}
       </div>
     </div>

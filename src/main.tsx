@@ -2,7 +2,7 @@ import { isDark } from "appmon/detection";
 import { getThemeStore } from "appmon/storage";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./assets/index.css";
+import "./index.css";
 import Page from "./pages";
 
 let themeClass = isDark() ? "dark" : "light";
