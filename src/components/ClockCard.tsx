@@ -2,7 +2,7 @@ import { Clock } from "react-feather";
 
 export default function ClockCard({ timezone }: { timezone: string }) {
   return (
-    <div className="w-full flex gap-4 text-slate-600 dark:text-slate-300 tracking-wider text-[16px]">
+    <div className="w-full flex gap-4 text-slate-600 dark:text-slate-300 tracking-wider text-base">
       {" "}
       <Clock />{" "}
       {(new Date()).toLocaleString("en-US", {
@@ -14,7 +14,8 @@ export default function ClockCard({ timezone }: { timezone: string }) {
         month: 'long',
         day: "2-digit",
         dayPeriod: "long",
-        weekday: "long"
+        weekday: "long",
+        timeZoneName: 'long'
       })}
     </div>
   );
