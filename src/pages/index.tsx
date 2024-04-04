@@ -28,16 +28,16 @@ export function TimezoneCardGroup() {
   const { locale } = useApp()
 
   const updateTimezone = (value: string) => {
-    const key = value.toLowerCase();
-    const found = timezone.filter((item) => {
+    const key = value.toLowerCase().trim();
+    const items = timezone.filter((item) => {
       return (
-        item.timezone.toLowerCase().replace(/\//, " ").includes(key) ||
-        item.timezone.toLowerCase().includes(key) ||
-        item.country_name.toLowerCase().includes(key) ||
-        item.more.standard_name?.toLowerCase().includes(key)
+        item?.timezone?.toLowerCase().replace(/\//, " ").includes(key) ||
+        item?.timezone?.toLowerCase().includes(key) ||
+        item?.country_name?.toLowerCase().includes(key) ||
+        item?.more?.standard_name?.toLowerCase().includes(key)
       );
     });
-    setItmezone(found);
+    setItmezone(items);
   };
 
   useEffect(() => {
