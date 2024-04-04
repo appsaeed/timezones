@@ -1,16 +1,8 @@
-import { deviceTheme } from "appmon/detection";
-import { getThemeStore } from "appmon/storage";
-import { unslash } from "appmon/url";
+import { getThemeStore, systemTheme, unslash } from 'appmon';
+import { home_url } from './utiles';
 import logo from '/logo.png';
 
 const basename = unslash(import.meta.env.VITE_BASENAME || "");
-
-function makeHomeUrl() {
-    if (basename) {
-        return location.origin + "/" + basename;
-    }
-    return location.origin
-}
 
 function makeScope() {
     return '/' + basename + '/';
@@ -26,14 +18,12 @@ const settings = {
 
     basename: basename,
 
-    url: makeHomeUrl(),
+    url: home_url(basename),
 
     scope: makeScope(),
 
     theme_key: import.meta.env.VITE_THEME_STORAGE || 'theme',
 
-    theme: getThemeStore(import.meta.env.VITE_THEME_STORAGE) || deviceTheme(),
+    theme: getThemeStore(import.meta.env.VITE_THEME_STORAGE) || systemTheme,
 };
-
-export type Settings = typeof settings;
 export default settings

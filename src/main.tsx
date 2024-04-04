@@ -1,5 +1,5 @@
-import { isDark } from "appmon/detection";
-import { getThemeStore } from "appmon/storage";
+
+import { getThemeStore, is_dark } from "appmon";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { AppProvider } from "./app/AppProvidor";
@@ -7,7 +7,7 @@ import settings from "./app/settings";
 import "./index.css";
 import Page from "./pages";
 
-let themeClass = isDark() ? "dark" : "light";
+let themeClass = is_dark ? "dark" : "light";
 if (getThemeStore(settings.theme_key)) {
   themeClass = getThemeStore(settings.theme_key);
 }

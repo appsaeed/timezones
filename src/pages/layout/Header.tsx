@@ -1,6 +1,6 @@
-import { setThemeStore } from "appmon/storage";
 import { useEffect, useState } from "react";
 
+import { setThemeStore } from "appmon";
 import { useApp } from "../../app/AppProvidor";
 import settings from "../../app/settings";
 import { cn } from "../../app/utiles";
