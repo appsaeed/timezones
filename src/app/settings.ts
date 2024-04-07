@@ -1,8 +1,7 @@
-import { getThemeStore, systemTheme, unslash } from 'appmon';
-import { home_url } from './utiles';
+import { baseURL, getThemeStore, systemTheme, unSlash } from 'utilies';
 import logo from '/logo.png';
 
-const basename = unslash(import.meta.env.VITE_BASENAME || "");
+const basename = unSlash(import.meta.env.VITE_BASENAME || "");
 
 function makeScope() {
     return '/' + basename + '/';
@@ -18,7 +17,7 @@ const settings = {
 
     basename: basename,
 
-    url: home_url(basename),
+    url: baseURL(basename),
 
     scope: makeScope(),
 

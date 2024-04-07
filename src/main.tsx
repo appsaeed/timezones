@@ -1,7 +1,6 @@
-
-import { getThemeStore, is_dark } from "appmon";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { getThemeStore, is_dark } from "utilies";
 import { AppProvider } from "./app/AppProvidor";
 import settings from "./app/settings";
 import "./index.css";
