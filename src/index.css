@@ -51,5 +51,5 @@
 }
 
 .group:active .group-active\:animate-refresh {
-  animation: spain 1s linear infinite;
+  animation: spin 1s linear infinite;
 }
