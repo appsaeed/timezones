@@ -68,7 +68,7 @@ export function TimezoneCardGroup() {
       <div className="flex gap-4 justify-between my-4">
         <ButtonGGreen onClick={sortTimezone} className="group">
           <MdRefresh className={cn(
-            "mr-1 text-lg transition-all  duration-[1s] group-active:rotate-[360deg]"
+            "mr-1 text-lg transition-all  duration-[s]s group-active:animate-refresh"
           )} />
           Refresh
         </ButtonGGreen>

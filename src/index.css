@@ -33,3 +33,19 @@
     /* 10px */
   ;
 }
+
+@keyframes refresh {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(1080deg);
+  }
+}
+
+.group:active .group-active\:animate-refresh {
+  animation: refresh 1.5s linear infinite;
+}
