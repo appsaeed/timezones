@@ -1,14 +1,13 @@
-import { isDark } from "appmon/detection";
-import { getThemeStore } from "appmon/storage";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
+import { getThemeStore, is_dark } from "utilies";
 import settings from "./app/settings";
 import "./index.css";
 import Page from "./pages";
 import store from "./redux/store";
 
-let themeClass = isDark() ? "dark" : "light";
+let themeClass = is_dark ? "dark" : "light";
 if (getThemeStore(settings.theme_key)) {
   themeClass = getThemeStore(settings.theme_key);
 }
