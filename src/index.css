@@ -41,8 +41,12 @@
     transform: rotate(0deg);
   }
 
+  %25{
+    transform: rotate(180deg)
+  }
+
   50% {
-    transform: rotate(1080deg);
+    transform: rotate(360deg);
   }
 }
 
