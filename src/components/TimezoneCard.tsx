@@ -1,4 +1,4 @@
-import countries from '../assets/countries.json';
+import countries from '../../public/assets/countries.json';
 import { Timezone } from '../types';
 import ClockCard from "./ClockCard";
 export default function TimezoneCard(item: Timezone) {

@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { setThemeStore } from "utilies";
+import languages from "../../../public/assets/languages.json";
 import settings from "../../app/settings";
 import { cn } from "../../app/utiles";
-import languages from "../../assets/languages.json";
 import Dropdown from "../../components/Dropdown";
 import DropdownItem from "../../components/DropdownItem";
 import Moon from "../../components/Moon";

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 import { MdRefresh } from "react-icons/md";
+import { default as timezone, default as timezoneList } from "../../public/assets/timezones.json";
 import { cn } from "../app/utiles";
-import { default as timezone, default as timezoneList } from "../assets/timezones.json";
 import ButtonGGreen from "../components/ButtonGGreen";
 import TimezoneCard from "../components/TimezoneCard";
 import useApplication from "../hooks/useApplication";

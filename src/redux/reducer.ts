@@ -1,7 +1,7 @@
 
 import { combineReducers } from "redux";
+import languages from '../../public/assets/languages.json';
 import { getLocale, saveLocale } from "../app/utiles";
-import languages from '../assets/languages.json';
 import { UPDATE_LOCALE } from "./actions";
 
 type Action = {
