@@ -1,5 +1,6 @@
 import clsx, { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { Locale } from "../redux/reducer";
 import settings from "./settings";
 
 export function cn(...inputs: ClassValue[]) {
@@ -8,14 +9,29 @@ export function cn(...inputs: ClassValue[]) {
 
 export const worker_path = settings.url + '/push.js';
 
-export function errorToString(error: any): string {
 
-    if (Array.isArray(error)) {
-        return String(error.join(' '))
-    } else if (typeof error === 'object') {
-        return String(JSON.stringify(error))
+export function catchOrNull<T>(calling: () => T, callback?: (error?: any) => void) {
+    try {
+        if (typeof calling === 'function') return calling();
+        return null;
     }
+    catch (error) {
+        if (callback) callback(error);
+        return null;
+    }
+}
 
-    return String(error)
 
+
+export function saveLocale(locale: Locale) {
+    localStorage.setItem('tz_locale', JSON.stringify(locale))
+}
+
+export function getLocale(): Locale | null {
+    try {
+        const data = JSON.parse(localStorage.getItem('tz_locale') || '')
+        return data as Locale || null;
+    } catch (error) {
+        return null;
+    }
 }

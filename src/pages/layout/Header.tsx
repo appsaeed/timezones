@@ -1,28 +1,27 @@
-import { setThemeStore } from "appmon/storage";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { useApp } from "../../app/AppProvidor";
+
+import { useDispatch } from "react-redux";
+import { setThemeStore } from "utilies";
 import settings from "../../app/settings";
 import { cn } from "../../app/utiles";
-import countries from "../../assets/countries.json";
+import languages from "../../assets/languages.json";
 import Dropdown from "../../components/Dropdown";
 import DropdownItem from "../../components/DropdownItem";
 import Moon from "../../components/Moon";
 import Sun from "../../components/Sun";
+import useApplication from "../../hooks/useApplication";
+import { updateLocale } from "../../redux/actions";
 import BrandLogo from "./BrandLogo";
 
 export default function Header() {
-    const [fixed, setFixed] = useState(false);
-    const { locale, setLocale } = useApp();
-
-
+    const { locale } = useApplication();
+    const dispatch = useDispatch();
+    const header = useRef<HTMLElement>(null)
     useEffect(() => {
         function scrollToFixed() {
-            if (document.documentElement.scrollTop > 100) {
-                setFixed(true);
-            } else {
-                setFixed(false);
-            }
+            const fixed = document.documentElement.scrollTop > 100;
+            if (header.current) header.current.classList.toggle('fixed-top-header', fixed)
         }
 
         scrollToFixed();
@@ -36,23 +35,12 @@ export default function Header() {
         };
     }, []);
 
-    const updateLang = (locale: string) => {
-        if (locale) {
-            localStorage.setItem('tz_locale', locale);
-            setLocale(locale)
-        }
-    }
-
-    const lang = countries.find(i => i.default_locale === locale);
-
     return (
         <header
+            ref={header}
             id="header"
             className={cn(
-                `transition-all z-[999] top-0 left-0 right-0 w-full bg-slate-200 dark:bg-slate-800 shadow-2xl  fixed py-4`,
-                {
-                    "py-2.5": fixed,
-                }
+                `transition-all z-[999] top-0 left-0 right-0 w-full bg-slate-200 dark:bg-slate-800 shadow-2xl  fixed py-4`
             )}
         >
             <nav className={"w-full px-8"}>
@@ -60,15 +48,14 @@ export default function Header() {
                     <BrandLogo logo={settings.logo} href={settings.url} />
                     <div className="flex items-center">
                         <div className="relative cursor-pointer mr-3 text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
-                            <Dropdown head={
-                                <>{lang?.emoji + ' ' + lang?.name}</>
-                            }>
-                                {countries.map((lang, i) => (
+                            <Dropdown head={`${locale?.emoji} ${locale?.name} ${locale.native_name}`}>
+                                {languages.map((lang, i) => (
                                     <DropdownItem key={i}
-                                        onClick={() => updateLang(lang.default_locale)} className="w-48s">
+                                        active={JSON.stringify(lang) == JSON.stringify(locale)}
+                                        onClick={() => dispatch(updateLocale(lang))} className="w-48s">
                                         <div className="flex gap-2">
                                             <div className="w-6">{lang.emoji}</div>
-                                            <div className="w-36">{lang.name}</div>
+                                            <div className="w-36">{lang.name} ({lang.native_name})</div>
                                         </div>
                                     </DropdownItem>
                                 ))}

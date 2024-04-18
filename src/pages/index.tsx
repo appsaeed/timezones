@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 
 import { MdRefresh } from "react-icons/md";
-import { useApp } from "../app/AppProvidor";
 import { cn } from "../app/utiles";
-import countries from '../assets/countries.json';
 import { default as timezone, default as timezoneList } from "../assets/timezones.json";
 import ButtonGGreen from "../components/ButtonGGreen";
 import TimezoneCard from "../components/TimezoneCard";
+import useApplication from "../hooks/useApplication";
 import { Timezone } from "../types";
 import Navbar from "./layout/Navbar";
 import SearchBar from "./layout/SearchBar";
@@ -25,7 +24,7 @@ export default function Index() {
 export function TimezoneCardGroup() {
   const [timezones, setItmezone] = useState(timezoneList);
   const [search, setSearch] = useState("");
-  const { locale } = useApp()
+  const { locale } = useApplication()
 
   const updateTimezone = (value: string) => {
     const key = value.toLowerCase();
@@ -54,11 +53,10 @@ export function TimezoneCardGroup() {
     // setItmezone([sort[0]]);
   };
 
-  const lang_code = countries.find(i => i.default_locale === locale)?.alpha2;
   const customSort = (a: Timezone, b: Timezone) => {
-    if (a.country_code === lang_code) {
+    if (a.country_code === locale?.locale) {
       return -1; // `a` comes before `b` if it's the element to bring to the top
-    } else if (b.country_code === lang_code) {
+    } else if (b.country_code === locale?.locale) {
       return 1; // `b` comes before `a` if it's the element to bring to the top
     } else {
       return 0; // Keep the order unchanged for other elements

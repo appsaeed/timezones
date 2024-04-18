@@ -3,7 +3,6 @@ import { Timezone } from '../types';
 import ClockCard from "./ClockCard";
 export default function TimezoneCard(item: Timezone) {
   const country = countries.find(country => country.alpha2 === item.country_code);
-  // console.log(country)
   return (
     <div className="bg-slate-50 dark:bg-slate-700 shadow-md p-6 rounded-2xl">
       <div className="flex justify-between gap-4 mb-6 w-full">

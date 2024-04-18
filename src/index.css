@@ -5,6 +5,7 @@
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background-color: gray;
 }
@@ -20,4 +21,15 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: red;
+}
+
+
+
+.fixed-top-header {
+  padding-top: 0.625rem
+    /* 10px */
+  ;
+  padding-bottom: 0.625rem
+    /* 10px */
+  ;
 }
