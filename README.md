@@ -2,7 +2,7 @@
 
 ## Dome
 
-Page url [link](https://appsaeed.github.io/timezones)
+Demo Page url [link](https://appsaeed.github.io/timezones)
 
 Home page [link](https://appsaeed.github.io)
 
