@@ -55,7 +55,7 @@ export default function Header() {
                                         onClick={() => dispatch(updateLocale(lang))} className="w-48s">
                                         <div className="flex gap-2">
                                             <div className="w-6">{lang.emoji}</div>
-                                            <div className="w-36">{lang.name} ({lang.native_name})</div>
+                                            {/* <div className="w-36">{lang.name} ({lang.native_name})</div> */}
                                         </div>
                                     </DropdownItem>
                                 ))}
