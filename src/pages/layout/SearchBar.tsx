@@ -6,7 +6,12 @@ type Props = React.DetailedHTMLProps<
 };
 export default function SearchBar({ ...props }: Props) {
   return (
-    <form className={`max-sm:w-[70%] ${props.classes}`}>
+    <form className={`max-sm:w-[70%] ${props.classes}`} 
+    onSubmit={(e)=> {
+      e.preventDefault();
+      props?.onClick && props.onClick(e?.search)} 
+    }
+      >
       <label
         htmlFor="default-search"
         className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
