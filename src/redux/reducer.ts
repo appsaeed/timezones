@@ -5,6 +5,7 @@ import { getLocale, saveLocale } from "../app/utiles";
 import { UPDATE_LOCALE } from "./actions";
 
 type Action = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     payload: any;
     type: string,
 }

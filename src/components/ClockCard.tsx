@@ -27,7 +27,7 @@ export default function ClockCard({ timezone }: { timezone: string }) {
               dayPeriod: "long",
               weekday: "long",
               timeZoneName: 'long'
-            })
+            }) || language
           )
         }
       </div>

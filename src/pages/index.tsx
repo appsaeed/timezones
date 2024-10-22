@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-
+import { useCallback, useMemo, useState } from "react";
 import { MdRefresh } from "react-icons/md";
-import { default as timezone, default as timezoneList } from "../../public/assets/timezones.json";
+import timezone from "../../public/assets/timezones.json";
 import { cn } from "../app/utiles";
 import ButtonGGreen from "../components/ButtonGGreen";
 import TimezoneCard from "../components/TimezoneCard";
@@ -10,9 +9,8 @@ import { Timezone } from "../types";
 import Navbar from "./layout/Navbar";
 import SearchBar from "./layout/SearchBar";
 
+// Main Component
 export default function Index() {
-
-
   return (
     <>
       <Navbar />
@@ -21,64 +19,51 @@ export default function Index() {
   );
 }
 
+// Timezone Card Group Component
 export function TimezoneCardGroup() {
-  const [timezones, setItmezone] = useState(timezoneList);
   const [search, setSearch] = useState("");
-  const { locale } = useApplication()
+  const { locale } = useApplication();
 
-  const updateTimezone = (value: string) => {
-    const key = value.toLowerCase();
-    const found = timezone.filter((item) => {
+  // Debounced search input handler
+  const updateSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  }, []);
+
+  // Filter and sort timezones
+  const filteredTimezones = useMemo(() => {
+    const key = search.trim().toLowerCase();
+    const filtered = timezone.filter((item) => {
       return (
         item.timezone.toLowerCase().replace(/\//, " ").includes(key) ||
-        item.timezone.toLowerCase().includes(key) ||
         item.country_name.toLowerCase().includes(key) ||
         item.more.standard_name?.toLowerCase().includes(key)
       );
     });
-    setItmezone(found);
-  };
 
-  useEffect(() => {
-    if (search && search !== "") {
-      updateTimezone(search);
-    }
-  }, [search]);
+    // Custom sort: Bring the user's locale to the top
+    return filtered.sort((a, b) => {
+      if (a.country_code === locale?.locale) return -1;
+      if (b.country_code === locale?.locale) return 1;
+      return 0;
+    });
+  }, [search, locale]);
 
-  const sortTimezone = () => {
-    // const sort = timezone.sort(function () {
-    //   return 0.5 - Math.random();
-    // });
-    updateTimezone(search);
-    // setItmezone([sort[0]]);
-  };
-
-  const customSort = (a: Timezone, b: Timezone) => {
-    if (a.country_code === locale?.locale) {
-      return -1; // `a` comes before `b` if it's the element to bring to the top
-    } else if (b.country_code === locale?.locale) {
-      return 1; // `b` comes before `a` if it's the element to bring to the top
-    } else {
-      return 0; // Keep the order unchanged for other elements
-    }
-  };
+  // Handler to refresh the filtered list
+  const sortTimezone = useCallback(() => {
+    setSearch((prevSearch) => prevSearch); // Trigger re-filtering if needed
+  }, []);
 
   return (
     <div className="p-6">
       <div className="flex gap-4 justify-between my-4">
         <ButtonGGreen onClick={sortTimezone} className="group">
-          <MdRefresh className={cn(
-            "mr-1 text-lg transition-all  duration-[s]s group-active:animate-refresh"
-          )} />
+          <MdRefresh className={cn("mr-1 text-lg transition-all group-active:animate-refresh")} />
           Refresh
         </ButtonGGreen>
-        <SearchBar
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <SearchBar value={search} onChange={updateSearch} />
       </div>
       <div className="flex flex-col md:grid md:grid-cols-3 justify-center gap-4 mb-8">
-        {timezones.sort(customSort).map((item: Timezone, index) => (
+        {filteredTimezones.map((item: Timezone, index) => (
           <TimezoneCard key={index} {...item} />
         ))}
       </div>

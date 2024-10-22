@@ -48,14 +48,14 @@ export default function Header() {
                     <BrandLogo logo={settings.logo} href={settings.url} />
                     <div className="flex items-center">
                         <div className="relative cursor-pointer mr-3 text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
-                            <Dropdown head={`${locale?.emoji} ${locale?.name} ${locale.native_name}`}>
+                            <Dropdown head={`${locale?.emoji}`}>
                                 {languages.map((lang, i) => (
                                     <DropdownItem key={i}
                                         active={JSON.stringify(lang) == JSON.stringify(locale)}
                                         onClick={() => dispatch(updateLocale(lang))} className="w-48s">
                                         <div className="flex gap-2">
                                             <div className="w-6">{lang.emoji}</div>
-                                            {/* <div className="w-36">{lang.name} ({lang.native_name})</div> */}
+                                            {<div className="w-36">{lang.name} ({lang.native_name})</div>}
                                         </div>
                                     </DropdownItem>
                                 ))}
