@@ -1,15 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { getThemeStore, is_dark } from "utilies";
+import { getTheme, isDark } from "utilies/theme";
 import settings from "./app/settings";
 import "./index.css";
 import Page from "./pages";
 import store from "./redux/store";
 
-let themeClass = is_dark ? "dark" : "light";
-if (getThemeStore(settings.theme_key)) {
-  themeClass = getThemeStore(settings.theme_key);
+import { registerSW } from 'virtual:pwa-register';
+
+registerSW({
+  onNeedRefresh() { },
+  onOfflineReady() { },
+  immediate: true
+})
+
+let themeClass = isDark ? "dark" : "light";
+if (getTheme(settings.theme_key)) {
+  themeClass = getTheme(settings.theme_key);
 }
 document.documentElement.classList.add(themeClass);
 //selector div

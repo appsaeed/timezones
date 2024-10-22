@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 
 import { useDispatch } from "react-redux";
-import { setThemeStore } from "utilies";
+import { setTheme } from "utilies";
 import languages from "../../../public/assets/languages.json";
 import settings from "../../app/settings";
 import { cn } from "../../app/utiles";
@@ -76,7 +76,7 @@ export function SwtichTheme() {
     const handleTheme = () => {
         const theme = dark ? "light" : "dark";
         setDark(!dark);
-        setThemeStore(theme, settings.theme_key);
+        setTheme(theme, settings.theme_key);
         if (theme === "dark") {
             document.documentElement.classList.remove("light");
             document.documentElement.classList.add("dark");

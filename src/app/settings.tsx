@@ -1,4 +1,4 @@
-import { deviceTheme, getThemeStore, unSlash } from "utilies";
+import { getTheme, unSlash } from "utilies";
 import logo from '/logo.png';
 
 const basename = unSlash(import.meta.env.VITE_BASENAME || "");
@@ -30,7 +30,7 @@ const settings = {
 
     theme_key: import.meta.env.VITE_THEME_STORAGE || 'theme',
 
-    theme: getThemeStore(import.meta.env.VITE_THEME_STORAGE) || deviceTheme,
+    theme: getTheme(import.meta.env.VITE_THEME_STORAGE),
 };
 
 export type Settings = typeof settings;
