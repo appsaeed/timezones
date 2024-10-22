@@ -5,8 +5,7 @@ import { getLocale, saveLocale } from "../app/utiles";
 import { UPDATE_LOCALE } from "./actions";
 
 type Action = {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    payload: any;
+    payload: Locale;
     type: string,
 }
 const defautlLocale = languages[0];
@@ -24,7 +23,7 @@ export function application(state = initState, action: Action) {
             saveLocale(action.payload)
             return {
                 ...state,
-                locale: action.payload as Locale
+                locale: action.payload
             }
 
         default:
