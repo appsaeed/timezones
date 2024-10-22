@@ -7,7 +7,9 @@ type Props = React.DetailedHTMLProps<
 export default function SearchBar({ ...props }: Props) {
   return (
     <form className={`max-sm:w-[70%] ${props.classes}`} 
-    onSubmit={(e)=> {
+      // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+      onSubmit={(e:any)=> {
+      
       e.preventDefault();
       props?.onClick && props.onClick(e?.search)} 
     }
